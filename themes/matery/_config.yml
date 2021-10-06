@@ -37,7 +37,7 @@ cover:
 dream:
   enable: false
   showTitle: true
-  title: 欢迎关注
+  title: Thanks for following!
   text: 我搬到谁的隔壁，谁成了我的邻居。鸣谢生命有你参与，笑纳我的邀请。
   img: https://pic1.zhimg.com/80/v2-0205cde00e314b1414a5e9d94106a431_r.jpg
 
@@ -118,7 +118,7 @@ code:
 
 # 是否激活文章末尾的打赏功能，默认激活（你替换为的你自己的微信、支付宝二维码图片、或者使用网络图片也可以）.
 reward:
-  enable: true
+  enable: false
   title: 写作不易，客官能否打赏一杯奶茶？
   wechat: /medias/reward/wechat.png
   alipay: /medias/reward/alipay.jpg
@@ -129,7 +129,7 @@ reward:
 copyright:
   enable: true
   minCharNumber: 120 # 至少复制多少个字符就追加版权信息.
-  description: 本文章著作权归作者所有，任何形式的转载都请注明出处。
+  description: The copyright of this article belongs to the author, please indicate the source in any form of reprint.
 
 # Whether to activate the mathjax, this is a global configuration, but the post still does not open the mathjax rendering.
 # Considering that the mathjax loading is time consuming,
@@ -165,15 +165,15 @@ text:
 # profile in about page, including avatars, career, and personal introductions.
 # 在”关于”页面中配置个人信息，包括头像、职业和个人介绍.
 profile:
-  avatar: /medias/avatars/avatar.jpg
-  career: 华东师范大学 | 计算机科学与技术 | AntNLP
+  avatar: /medias/avatars/avatar.png
+  career: Qingdao Universicity | 计算机科学与技术 | AntNLP
   introduction: 我是华东师范大学计算机科学与技术专业2018级硕士研究生。直研进入本校计算机系攻读硕士，研究方向是深度学习与自然语言处理。我们实验室是AntNLP，欢迎大家报考！欢迎关注我的微信公众号「算法码上来」，干货每天不错过！
 
 # config my projects informations in about page.
 # If you don't want to display this `My Projects` content, you can deactivate or delete this configuration.
 # 在“关于”页面配置"我的项目"信息，如果你不需要这些信息则可以将其设置为不激活或者将其删除.
 myProjects:
-  enable: true
+  enable: false
   data:
     hexo-matery-modified:
       icon: fa-meetup
@@ -197,22 +197,13 @@ myProjects:
 mySkills:
   enable: true
   data:
-    Algorithm:
-      background: 'linear-gradient(to right, #FF0066 0%, #FF00CC 100%)'
-      percent: 90%
     C++:
       background: 'linear-gradient(to right, #9900FF 0%, #CC66FF 100%)'
       percent: 80%
     Python:
       background: 'linear-gradient(to right, #2196F3 0%, #42A5F5 100%)'
       percent: 80%
-    Pytorch:
-      background: 'linear-gradient(to right, #951213 0%, #961117 100%)'
-      percent: 75%
-    Dynet:
-      background: 'linear-gradient(to right, #F12F12 0%, #F6464F 100%)'
-      percent: 75%
-    Java:
+    C#:
       background: 'linear-gradient(to right, #00BCD4 0%, #80DEEA 100%)'
       percent: 50%
     SQL:
@@ -411,4 +402,4 @@ reprint:
 snow:
   enable: false
 
-baidu_push: true
+baidu_push: false

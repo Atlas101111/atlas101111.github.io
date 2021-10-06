@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 韦阳的博客
-subtitle: 算法码上来
-description: 华东师范大学 | 计算机科学与技术 | 自然语言处理
-keywords: "ECNU NLP DeepLearning AntNLP 韦阳 godweiyang WeiYang 自然语言处理 深度学习 算法码上来"
-author: 韦阳
-language: zh-CN
+title: David's Blog
+subtitle: A Distributed World
+description: Qingdao University | XiaoIce Ai | Distributed System
+keywords: "QDU Distributed Kubernets XiaoIce"
+author: David Hao
+language: en
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://godweiyang.com
+url: https://davidhao.pro
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
