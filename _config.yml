@@ -9,7 +9,7 @@ description: Qingdao University | XiaoIce Ai | Distributed System
 keywords: "QDU Distributed Kubernets XiaoIce"
 author: David Hao
 language: en
-timezone:
+timezone: America/Los_Angeles
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -83,7 +83,7 @@ sitemap:
 # per_page: Posts displayed per page. (0 = disable pagination)
 # order_by: Posts order. (Order by date descending by default)
 index_generator:
-  path: ''
+  path: '\'
   per_page: 12
   order_by: -date
   

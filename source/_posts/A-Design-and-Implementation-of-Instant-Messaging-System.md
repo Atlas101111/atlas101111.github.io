@@ -12,14 +12,14 @@ categories:
 ---
 In this article, I want to share my experience in designing an architecture of instant message system. A system using this design had already been deployed and put in use, supporting several hundred thousand concurrent connection. 
 
-# Challenges
+## Challenges
 There are mainly **four** challenges in all message system:
 1. **High Reliability**: Make sure not to lose messages
 2. **High Availability**: One or more servers hangs up will not affect the service
 3. **Real Time**: Fase respond, Online user messages can reach to client end within 1 second
 4. **Orderliness**: To ensure the orderliness of user messages, there will be no disorder of sending and receiving messaages.
 
-# Overall Design
+## Overall Design
 
 ![](/medias/IM_system/overall.png)
 

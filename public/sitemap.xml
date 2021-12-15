@@ -2,51 +2,65 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://davidhao.pro/tags/index.html</loc>
+    <loc>https://davidhao.pro/2021/12/16/index/</loc>
     
-    <lastmod>2021-10-09</lastmod>
+    <lastmod>2021-12-15</lastmod>
     
   </url>
   
   <url>
-    <loc>https://davidhao.pro/friends/index.html</loc>
+    <loc>https://davidhao.pro/2021/11/02/a-design-and-implementation-of-instant-messaging-system/</loc>
     
-    <lastmod>2021-10-09</lastmod>
+    <lastmod>2021-12-15</lastmod>
     
   </url>
   
   <url>
     <loc>https://davidhao.pro/contact/index.html</loc>
     
-    <lastmod>2021-10-09</lastmod>
+    <lastmod>2021-10-05</lastmod>
     
   </url>
   
   <url>
-    <loc>https://davidhao.pro/categories/index.html</loc>
+    <loc>https://davidhao.pro/friends/index.html</loc>
     
-    <lastmod>2021-10-09</lastmod>
+    <lastmod>2021-10-05</lastmod>
     
   </url>
   
   <url>
-    <loc>https://davidhao.pro/archives/index.html</loc>
+    <loc>https://davidhao.pro/tags/index.html</loc>
     
-    <lastmod>2021-10-09</lastmod>
+    <lastmod>2021-10-05</lastmod>
     
   </url>
   
   <url>
     <loc>https://davidhao.pro/about/index.html</loc>
     
-    <lastmod>2021-10-09</lastmod>
+    <lastmod>2021-10-05</lastmod>
     
   </url>
   
   <url>
-    <loc>https://davidhao.pro/2020/01/14/5w2h-godweiyang/</loc>
+    <loc>https://davidhao.pro/archives/index.html</loc>
     
-    <lastmod>2021-10-09</lastmod>
+    <lastmod>2021-10-05</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://davidhao.pro/categories/index.html</loc>
+    
+    <lastmod>2021-10-05</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://davidhao.pro/2020/01/15/5w2h-godweiyang/</loc>
+    
+    <lastmod>2021-10-05</lastmod>
     
   </url>
   
@@ -60,7 +74,7 @@
 
   <url>
     <loc>https://davidhao.pro/</loc>
-    <lastmod>2021-10-09</lastmod>
+    <lastmod>2021-12-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -68,7 +82,7 @@
   
   <url>
     <loc>https://davidhao.pro/tags/%E5%8D%9A%E5%AE%A2/</loc>
-    <lastmod>2021-10-09</lastmod>
+    <lastmod>2021-12-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -77,7 +91,7 @@
   
   <url>
     <loc>https://davidhao.pro/categories/%E9%9A%8F%E7%AC%94/</loc>
-    <lastmod>2021-10-09</lastmod>
+    <lastmod>2021-12-15</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
