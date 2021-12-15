@@ -6,7 +6,7 @@
   <link href="https://davidhao.pro/atom.xml" rel="self"/>
   
   <link href="https://davidhao.pro/"/>
-  <updated>2021-12-15T18:06:12.043Z</updated>
+  <updated>2021-12-15T18:00:26.809Z</updated>
   <id>https://davidhao.pro/</id>
   
   <author>
@@ -15,19 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title></title>
-    <link href="https://davidhao.pro/2021/12/16/index/"/>
-    <id>https://davidhao.pro/2021/12/16/index/</id>
-    <published>2021-12-15T18:06:10.826Z</published>
-    <updated>2021-12-15T18:06:12.043Z</updated>
-    
-    
-    
-    
-    
-  </entry>
   
   <entry>
     <title>A Design and Implementation of Instant Messaging System</title>
