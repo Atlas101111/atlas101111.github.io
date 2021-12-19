@@ -4,9 +4,9 @@ menu:
   Index:
     url: /
     icon: fa-home
-  Tags:
-    url: /tags
-    icon: fa-tags
+  # Tags:
+  #   url: /tags
+  #   icon: fa-tags
   Categories:
     url: /categories
     icon: fa-bookmark
@@ -16,9 +16,9 @@ menu:
   About:
     url: /about
     icon: fa-user-circle-o
-  Friends:
-    url: /friends
-    icon: fa-address-book
+  # Friends:
+  #   url: /friends
+  #   icon: fa-address-book
   Contact:
     url: /contact
     icon: fa-comments
@@ -199,13 +199,13 @@ mySkills:
   data:
     C++:
       background: 'linear-gradient(to right, #9900FF 0%, #CC66FF 100%)'
-      percent: 80%
+      percent: 60%
     Python:
       background: 'linear-gradient(to right, #2196F3 0%, #42A5F5 100%)'
       percent: 80%
     C#:
       background: 'linear-gradient(to right, #00BCD4 0%, #80DEEA 100%)'
-      percent: 50%
+      percent: 80%
     SQL:
       background: 'linear-gradient(to right, #4CAF50 0%, #81C784 100%)'
       percent: 50%
@@ -402,4 +402,4 @@ reprint:
 snow:
   enable: false
 
-baidu_push: false
+baidu_push: true

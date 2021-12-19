@@ -140,6 +140,6 @@ live2d:
 
 baidu_url_submit:
   count: 100
-  host: godweiyang.com
-  token: jp7MKvOw74Yh3F09
+  host: davidhao.pro
+  token: uSolvlVsIu6RVda9
   path: baidu_urls.txt
