@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="A Design and Implementation of Instant Messaging System, QDU Distributed Kubernets XiaoIce">
+    <meta name="keywords" content="A Design and Implementation of Instant Messaging System(1), QDU Distributed Kubernets XiaoIce">
     <meta name="baidu-site-verification" content="fmlEuI34ir" />
     <meta name="google-site-verification" content="yCy2azpds5XSuGZvis6OuA-XIGF5GuGpYRAaGfD6o48" />
     <meta name="360-site-verification" content="b7c11a830ef90fd1464ad6206bb7b6e7" />
@@ -16,7 +16,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>A Design and Implementation of Instant Messaging System | David&#39;s Blog</title>
+    <title>A Design and Implementation of Instant Messaging System(1) | David&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -231,13 +231,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/27.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        A Design and Implementation of Instant Messaging System
+                        A Design and Implementation of Instant Messaging System(1)
                     </div>
                 </div>
             </div>
@@ -382,14 +382,14 @@
                 
                 <div class="info-break-policy">
                     <i class="fa fa-file-word-o fa-fw"></i>Word Count:&nbsp;&nbsp;
-                    1.2k
+                    1.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="fa fa-clock-o fa-fw"></i>Read Times:&nbsp;&nbsp;
-                    7 Min
+                    8 Min
                 </div>
                 
                 
@@ -429,22 +429,7 @@
 </ul>
 </blockquote>
 <p>Next, I will illustrate those subsystems in detail.</p>
-<h1 id="Subsytems"><a href="#Subsytems" class="headerlink" title="Subsytems"></a>Subsytems</h1><h2 id="Connection-Service"><a href="#Connection-Service" class="headerlink" title="Connection Service"></a>Connection Service</h2><p>Connection service is the entrance of the whole system, so this service may face with big surge when many users log in and send messages to each other. Another problem that may occur is <em>avalanche effect</em>, which can cause a collapse of the entire service. </p>
-<p>To prevent potential circumstances like those, we use <strong>RabbitMQ as message queue</strong> to shave peak load.</p>
-<p>The main responsibilities of the connection service can be divided into 2 parts:</p>
-<ul>
-<li><p><strong>Maintenance of online status — Connection Manager</strong><br>What the connection manager does is to keep a record of users’ online status, and to which one of the IM Signalr instances in the cluster this client connects to. </p>
-<p>The connection manager interacts with the Redis database. In Redis, we save the 3 things:</p>
-<blockquote>
-<ol>
-<li>Account UUID of the user</li>
-<li>IP of SignalR server user connects to </li>
-<li>SignalR’s connection ID</li>
-</ol>
-</blockquote>
-</li>
-</ul>
-<h2 id="Message-Service"><a href="#Message-Service" class="headerlink" title="Message Service"></a>Message Service</h2><p>A successful message service must have two features, first is the <strong>ability of horizontal expanding</strong>, the second one is <strong>flexibility</strong>, which means new features can be added or removed easily.<br>To achieve those demands, I divided the whole service into 4 parts:</p>
+<h1 id="Subsytems"><a href="#Subsytems" class="headerlink" title="Subsytems"></a>Subsytems</h1><h2 id="Message-Service"><a href="#Message-Service" class="headerlink" title="Message Service"></a>Message Service</h2><p><img src="https://s2.loli.net/2021/12/20/IQeZPyVjpmbuOdW.png" alt="Message Service"><br>A successful message service must have two features, first is the <strong>ability of horizontal expanding</strong>, the second one is <strong>flexibility</strong>, which means new features can be added or removed easily.<br>To achieve those demands, I divided the whole service into 4 parts:</p>
 <ol>
 <li><strong>Service router</strong></li>
 <li><strong>Message hub—Signalr</strong></li>
@@ -469,19 +454,28 @@
 </code></pre>
 <p>We also implemented <strong>stateless online status manager</strong> to help manipulate this Redis database. </p>
 <h4 id="Feature-microservices"><a href="#Feature-microservices" class="headerlink" title="Feature microservices"></a>Feature microservices</h4><p>Feature microservices are differents services in <strong>Kubernetes</strong>, they provide APIs to each other. For example, we can have <em>Group Manager</em> as a service, providing APIs like <em>create new group</em> or <em>add new members to the existing group</em>. When a message reaches the message hub, the hub will decide what microservices to call depending on its header or content. In this way, we prevent the code of the message hub from being too complicated to understand or modify in the future.</p>
-<h2 id="Storage-Service"><a href="#Storage-Service" class="headerlink" title="Storage Service"></a>Storage Service</h2><p>Our goal in designing storage services is to find the balance between performance and cost. The storage service classifies and treats data differently according to the frequency of accessing the data.</p>
+<h2 id="Storage-Service"><a href="#Storage-Service" class="headerlink" title="Storage Service"></a>Storage Service</h2><p><img src="https://s2.loli.net/2021/12/20/eUwspo2AdPgSHc5.png" alt="Storage Service"><br>Our goal in designing storage services is to find the balance between performance and cost. The storage service classifies and treats data differently according to the frequency of accessing the data.</p>
 <p>With that in mind, we store offline, unreached messages and history messages separately in Redis and MongoDB. To be more precise:</p>
 <blockquote>
-<p><em>Unreached messages</em>: In Redis, expire in 7 days<br><em>History messages</em>: In MongoDB shared cluster </p>
+<p><em>Recent messages</em>: In Redis, expire in 7 days<br><em>History messages</em>: In MongoDB shared cluster </p>
 </blockquote>
 <p>There are basically 4 types of components in the storage service:</p>
 <ul>
 <li><em>External Accessor</em>: provide API to manipulate MongoDB or Redis</li>
 <li><em>Rabbit MQ</em>: as a message queue, all the requests sent to storage service will first enqueue and wait to be processed</li>
 <li><em>Database Reader</em>: receive and process request of reading data</li>
-<li><em>Database Reader</em>: receive and process request of reading data</li>
+<li><em>Database Writer</em>: receive and process request of writing data</li>
 </ul>
 <p>Rabbitmq plays an extremely important role here, since we may need to support some high concurrency scenarios like hundreds of users in one group sending messages to each other, we need a message queue to shave peak so our whole system will not collapse.</p>
+<p>To ensure every message client sends will eventually be received by destnation receiver, one of the approachs we take is to persist the messages into MongoDB before sending. If fails, client will be asked to resend this message.</p>
+<h2 id="Push-Service"><a href="#Push-Service" class="headerlink" title="Push Service"></a>Push Service</h2><p>The core task of the push system is to use <strong>offline push</strong> (such as iOS APNS, Huawei push, Xiaomi push, etc.) for message notification when the user is not online after receiving a request to send a downlink message to the user.<br><img src="https://s2.loli.net/2021/12/20/jJtcub35IzphlUy.png" alt="Push Service"></p>
+<p>Because push services may have large-scale concurrent flocks, such as when a large group of heated discussions, it will trigger a billion-level TPS. Therefore, the push service uses RabbitMQ to do peak shaving.</p>
+<p>Here too, every module except RabbitMQ is stateless, because parallel expansion and fault tolerance can also be achieved, and any service failure does not affect the overall service availability</p>
+<h1 id="Summary-of-this-article"><a href="#Summary-of-this-article" class="headerlink" title="Summary of this article"></a>Summary of this article</h1><p>This article mainly summarizes the overall architecture design of this IM system that can carry 100000 DAU(Daily active users). For high performance and horizontal scalability, the entire architecture is divided into 3 subsystems based on the concept of WeChat, namely: message service, push system, storage system.</p>
+<p>Here is a picture that roughly illustrate the process of sending a message:<br><img src="https://s2.loli.net/2021/12/20/eqkWKPQxJhIS26f.png" alt="Send A Message"></p>
+<p>For these 3 subsystems, at the actual technical application layer, further service splitting and refinement have been carried out, which greatly enhances the scalability of the entire architecture.</p>
+<p>In the next article, I will elaborate the methods we use to solve some other more detailed but very important hot issues, such as: message reliability, message order, data security, mobile terminal weak network issues, etc.</p>
+<p>If you have any suggestions or questions about this article, welcome to write your thoughts in the comment area!!!</p>
 
             </div>
             <hr />
@@ -516,9 +510,9 @@
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《A Design and Implementation of Instant Messaging System》
+                    《A Design and Implementation of Instant Messaging System(1)》
                 </span> by
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2021/11/02/a-design-and-implementation-of-instant-messaging-system/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2021/11/02/a-design-and-implementation-of-instant-messaging-system-1/" property="cc:attributionName"
                rel="cc:attributionURL">
                 David Hao
             </a> is licensed under a
@@ -825,13 +819,13 @@
                 <i class="fa fa-dot-circle-o"></i>&nbsp;Current
             </div>
             <div class="card">
-                <a href="/2021/11/02/a-design-and-implementation-of-instant-messaging-system/">
+                <a href="/2021/11/02/a-design-and-implementation-of-instant-messaging-system-1/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/27.jpg" class="responsive-img" alt="A Design and Implementation of Instant Messaging System">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="A Design and Implementation of Instant Messaging System(1)">
                         
-                        <span class="card-title">A Design and Implementation of Instant Messaging System</span>
+                        <span class="card-title">A Design and Implementation of Instant Messaging System(1)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -867,13 +861,13 @@
                 Current&nbsp;<i class="fa fa-dot-circle-o"></i>
             </div>
             <div class="card">
-                <a href="/2021/11/02/a-design-and-implementation-of-instant-messaging-system/">
+                <a href="/2021/11/02/a-design-and-implementation-of-instant-messaging-system-1/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/27.jpg" class="responsive-img" alt="A Design and Implementation of Instant Messaging System">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="A Design and Implementation of Instant Messaging System(1)">
                         
-                        <span class="card-title">A Design and Implementation of Instant Messaging System</span>
+                        <span class="card-title">A Design and Implementation of Instant Messaging System(1)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1069,7 +1063,7 @@
 
             
             &nbsp;<i class="fa fa-area-chart"></i>&nbsp;Total words on the site:&nbsp;
-            <span class="white-color">1.2k</span>
+            <span class="white-color">1.4k</span>
             
 
             <br>
