@@ -21,7 +21,7 @@ There are mainly **four** challenges in all message system:
 
 ## Overall Design
 
-![](/medias/IM_system/overall.png)
+![overall.png](https://s2.loli.net/2021/12/16/feQ3LPaVE6BUlnr.png)
 
 Many ancient architectures tend to aggregate all the features into one service, which leads to two major problems:
  1. *Code is so **complex**, which makes it extramlly to develop new feature or even to maintain.*
@@ -67,7 +67,7 @@ Company I worked in is a subsidiary split from Microsoft, which means that many 
 
 So in order to be better compatible previous services, I chose **ASP.NET Core Signalr**, an open-source library that simplifies adding real-time web functionality to apps.Signalr supports the **Websocket protocol** very well, it can automatically send heartbeat messages to keep connection alive. Signalr is also integrated with ASP.NET's identity mechanism, makes it convienient to manipulate user's connection context.  
 
-![](/medias/IM_system/signalr.png "https://docs.microsoft.com/en-us/aspnet/signalr/overview/getting-started/introduction-to-signalr")
+![signalr.png](https://s2.loli.net/2021/12/16/upthTJgsFLU7Pnd.png)
 
 All messages come from clients must be pre-processed by Signalr message hub. Signalr hub will decide what to do with this message depends on its content or header, either forward to other feature microservice modules or save to persisted databases.
 
