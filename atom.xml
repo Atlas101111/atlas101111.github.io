@@ -6,7 +6,7 @@
   <link href="https://davidhao.pro/atom.xml" rel="self"/>
   
   <link href="https://davidhao.pro/"/>
-  <updated>2021-12-19T10:59:02.093Z</updated>
+  <updated>2021-12-19T13:45:19.542Z</updated>
   <id>https://davidhao.pro/</id>
   
   <author>
@@ -21,18 +21,20 @@
     <link href="https://davidhao.pro/2021/11/02/a-design-and-implementation-of-instant-messaging-system/"/>
     <id>https://davidhao.pro/2021/11/02/a-design-and-implementation-of-instant-messaging-system/</id>
     <published>2021-11-02T04:30:56.000Z</published>
-    <updated>2021-12-19T10:59:02.093Z</updated>
+    <updated>2021-12-19T13:45:19.542Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;p&gt;In this article, I want to share my experience in designing an architecture of instant message system. A system using this design had</summary>
+    <summary type="html">&lt;p&gt;In this article, I want to share my experience in designing the architecture of an instant message system. A system using this design</summary>
         
       
     
     
+    
+    <category term="Systems Architecture" scheme="https://davidhao.pro/categories/Systems-Architecture/"/>
     
     
   </entry>
