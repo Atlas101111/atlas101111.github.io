@@ -1,5 +1,5 @@
 ---
-title: A Design and Implementation of Instant Messaging System
+title: A Design and Implementation of Instant Messaging System(1)
 top: false
 cover: false
 toc: true
@@ -37,22 +37,8 @@ The responsibilities of the **three subsystems** are described as follows:
 Next, I will illustrate those subsystems in detail.
 
 # Subsytems
-## Connection Service
-Connection service is the entrance of the whole system, so this service may face with big surge when many users log in and send messages to each other. Another problem that may occur is *avalanche effect*, which can cause a collapse of the entire service. 
-
-To prevent potential circumstances like those, we use **RabbitMQ as message queue** to shave peak load.
-
-The main responsibilities of the connection service can be divided into 2 parts:
-
-+ **Maintenance of online status --- Connection Manager**
-  What the connection manager does is to keep a record of users' online status, and to which one of the IM Signalr instances in the cluster this client connects to. 
-
-  The connection manager interacts with the Redis database. In Redis, we save the 3 things:
-  >1. Account UUID of the user
-  >2. IP of SignalR server user connects to 
-  >3. SignalR's connection ID
-
 ## Message Service
+![Message Service](https://s2.loli.net/2021/12/20/IQeZPyVjpmbuOdW.png)
 A successful message service must have two features, first is the **ability of horizontal expanding**, the second one is **flexibility**, which means new features can be added or removed easily. 
 To achieve those demands, I divided the whole service into 4 parts:
 1. **Service router**
@@ -97,19 +83,39 @@ Feature microservices are differents services in **Kubernetes**, they provide AP
 
 
 ## Storage Service
+![Storage Service](https://s2.loli.net/2021/12/20/eUwspo2AdPgSHc5.png)
 Our goal in designing storage services is to find the balance between performance and cost. The storage service classifies and treats data differently according to the frequency of accessing the data.
 
 With that in mind, we store offline, unreached messages and history messages separately in Redis and MongoDB. To be more precise:
->*Unreached messages*: In Redis, expire in 7 days
+>*Recent messages*: In Redis, expire in 7 days
 >*History messages*: In MongoDB shared cluster 
 
 There are basically 4 types of components in the storage service:
 + *External Accessor*: provide API to manipulate MongoDB or Redis
 + *Rabbit MQ*: as a message queue, all the requests sent to storage service will first enqueue and wait to be processed
 + *Database Reader*: receive and process request of reading data
-+ *Database Reader*: receive and process request of reading data
++ *Database Writer*: receive and process request of writing data
 
 Rabbitmq plays an extremely important role here, since we may need to support some high concurrency scenarios like hundreds of users in one group sending messages to each other, we need a message queue to shave peak so our whole system will not collapse.
 
+To ensure every message client sends will eventually be received by destnation receiver, one of the approachs we take is to persist the messages into MongoDB before sending. If fails, client will be asked to resend this message.
 
+## Push Service
+The core task of the push system is to use **offline push** (such as iOS APNS, Huawei push, Xiaomi push, etc.) for message notification when the user is not online after receiving a request to send a downlink message to the user.
+![Push Service](https://s2.loli.net/2021/12/20/jJtcub35IzphlUy.png)
 
+Because push services may have large-scale concurrent flocks, such as when a large group of heated discussions, it will trigger a billion-level TPS. Therefore, the push service uses RabbitMQ to do peak shaving.
+
+Here too, every module except RabbitMQ is stateless, because parallel expansion and fault tolerance can also be achieved, and any service failure does not affect the overall service availability
+
+# Summary of this article
+This article mainly summarizes the overall architecture design of this IM system that can carry 100000 DAU(Daily active users). For high performance and horizontal scalability, the entire architecture is divided into 3 subsystems based on the concept of WeChat, namely: message service, push system, storage system.
+
+Here is a picture that roughly illustrate the process of sending a message:
+![Send A Message](https://s2.loli.net/2021/12/20/eqkWKPQxJhIS26f.png)
+
+For these 3 subsystems, at the actual technical application layer, further service splitting and refinement have been carried out, which greatly enhances the scalability of the entire architecture.
+
+In the next article, I will elaborate the methods we use to solve some other more detailed but very important hot issues, such as: message reliability, message order, data security, mobile terminal weak network issues, etc.
+
+If you have any suggestions or questions about this article, welcome to write your thoughts in the comment area!!!
